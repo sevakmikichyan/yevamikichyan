@@ -7,6 +7,7 @@ import { Props } from "./types";
 import { useTheme } from "@/context/theme.context";
 import { applyBgColor, applyBorderColor, applyShadowColor } from "@/common/utils";
 import classNames from "classnames";
+import { motion, AnimatePresence } from "framer-motion";
 
 type ModalProps = Props & {
   isOpen: boolean;
@@ -27,38 +28,48 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!isOpen) return null;
-
   const appliedBgColor = applyBgColor(resolvedTheme);
   const appliedShadowColor = applyShadowColor(oppositeTheme);
   const appliedBorderColor = applyBorderColor(oppositeTheme);
 
   return ReactDOM.createPortal(
-    <div
-      className="fixed inset-0 bg-dark/50 flex items-center justify-center"
-      style={{ zIndex }}
-      onClick={onClose}
-    >
-      <Container size={containerSize} className="flex items-center justify-center">
-        <div
-          {...rest}
-          className={classNames(
-            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2 md:pt-2xl pt-xl",
-            appliedBgColor,
-            appliedShadowColor, appliedBorderColor
-          )}
-          onClick={(e) => e.stopPropagation()}
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 bg-dark/50 flex items-center justify-center"
+          style={{ zIndex }}
+          onClick={onClose}
+          transition={{duration: .1}}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
-          <button
-            className="absolute top-4 right-4 cursor-pointer text-md"
-            onClick={onClose}
-          >
-            ✕
-          </button>
-          {children}
-        </div>
-      </Container>
-    </div>,
+          <Container size={containerSize} className="flex items-center justify-center">
+            <motion.div
+              {...rest}
+              className={classNames(
+                "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2 md:pt-2xl pt-xl",
+                appliedBgColor,
+                appliedShadowColor, appliedBorderColor
+              )}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.1 }}
+            >
+              <button
+                className="absolute top-4 right-4 cursor-pointer text-md"
+                onClick={onClose}
+              >
+                ✕
+              </button>
+              {children}
+            </motion.div>
+          </Container>
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.body
   );
 };

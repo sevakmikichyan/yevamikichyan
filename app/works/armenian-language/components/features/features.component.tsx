@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Block, Flex, Grid } from "@/common/components/layout";
 import { Paragraph, Span, Title } from "@/common/components/typography";
-import { Button, Card, Carousel, List, Modal } from "@/common/components/ui";
+import { Button, Card, Carousel, List, Modal, Reveal } from "@/common/components/ui";
 import React from "react";
 import { Feature, Props } from "./types";
 import Image from "next/image";
@@ -396,6 +396,9 @@ const Features: React.FC<Props> = ({ ...rest }) => {
 
   const handleOpenModal = (index: number) => {
     setSelectedFeatureIndex(index);
+    requestAnimationFrame(() => {
+      modalContentRef.current?.scrollTo(0, 0);
+    });
   };
 
   const handleCloseModal = () => {
@@ -409,16 +412,18 @@ const Features: React.FC<Props> = ({ ...rest }) => {
     <>
       <Grid className="lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-lg gap-md rounded-md md:mt-lg mt-md">
         {features.map((feature, index) => (
-          <Carousel.Slide key={index} className="w-full">
-            <Card className="w-full h-full">
-              <Flex className="w-full flex-1 h-full flex-col md:gap-md justify-between gap-sm">
-                <Title heading={3}>{feature.title}</Title>
-                <Button className="w-full" onClick={() => handleOpenModal(index)}>
-                  Տեսնել
-                </Button>
-              </Flex>
-            </Card>
-          </Carousel.Slide>
+          <Reveal key={index} delay={index * .1}>
+            <Carousel.Slide className="w-full">
+              <Card className="w-full h-full">
+                <Flex className="w-full flex-1 h-full flex-col md:gap-md justify-between gap-sm">
+                  <Title heading={3}>{feature.title}</Title>
+                  <Button className="w-full" onClick={() => handleOpenModal(index)}>
+                    Տեսնել
+                  </Button>
+                </Flex>
+              </Card>
+            </Carousel.Slide>
+          </Reveal>
         ))}
       </Grid>
 

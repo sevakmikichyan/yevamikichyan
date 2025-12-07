@@ -5,6 +5,7 @@ import Header from "@/common/components/layout/header/header.component";
 import { Title } from "@/common/components/typography";
 import Features from "./components/features/features.component";
 import { useEffect } from "react";
+import { Reveal } from "@/common/components/ui";
 
 export default function ArmenianLanguage() {
   useEffect(() => {
@@ -24,7 +25,9 @@ export default function ArmenianLanguage() {
       <Header />
       <Main className="static">
         <Container className="static">
-          <Title heading={1} align="center">Հայոց լեզու</Title>
+          <Reveal>
+            <Title heading={1} align="center" className="font-adamathuz">Հայոց լեզու</Title>
+          </Reveal>
           <Features />
         </Container>
       </Main>
