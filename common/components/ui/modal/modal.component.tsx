@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { Container, Block } from "../../layout";
 import { Props } from "./types";
 import { useTheme } from "@/context/theme.context";
-import { applyBgColor, applyShadowColor } from "@/common/utils";
+import { applyBgColor, applyBorderColor, applyShadowColor } from "@/common/utils";
 import classNames from "classnames";
 
 type ModalProps = Props & {
@@ -31,6 +31,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
 
   const appliedBgColor = applyBgColor(resolvedTheme);
   const appliedShadowColor = applyShadowColor(oppositeTheme);
+  const appliedBorderColor = applyBorderColor(oppositeTheme);
 
   return ReactDOM.createPortal(
     <div
@@ -42,9 +43,9 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
         <div
           {...rest}
           className={classNames(
-            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto",
+            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2",
             appliedBgColor,
-            appliedShadowColor
+            appliedShadowColor, appliedBorderColor
           )}
           onClick={(e) => e.stopPropagation()}
         >
