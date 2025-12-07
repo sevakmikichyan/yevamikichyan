@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+:root {
+  --light: #f0f0f0;
+  --dark: #0f0f0f;
+}
+
+@theme {
+  --color-primary: #0d6efd;
+  --color-secondary: #6c757d;
+  --color-error: #dc3545;
+  --color-warning: #ffc107;
+  --color-success: #198754;
+  --color-info: #0dcaf0;
+  --color-light: #f0f0f0;
+  --color-dark: #0f0f0f;
+  --color-orange: #fd7e14;
+  --color-violet: #6f42c1;
+  --color-indigo: #6610f2;
+  --color-teal: #20c997;
+  --color-rose: #d63384;
+}
+
+@theme {
+  --breakpoint-2xs: 24rem;
+  --breakpoint-xs: 32rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+@theme {
+  --spacing-2xs: .25rem;
+  --spacing-xs: .5rem;
+  --spacing-sm: .75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+}
+
+@theme {
+  --text-2xs: .25rem;
+  --text-xs: .5rem;
+  --text-sm: .75rem;
+  --text-md: 1rem;
+  --text-lg: 1.5rem;
+  --text-xl: 2rem;
+  --text-2xl: 4rem;
+}
+
+@theme {
+  --transition-duration: 200ms;
+  --transition-timing: ease-in-out;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html.light:root {
+  --background: var(--light);
+  --foreground: var(--dark);
+}
+
+html.dark:root {
+  --background: var(--dark);
+  --foreground: var(--light);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+}
+
+body {
+  background-image: url("../public/images/light-background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  backdrop-filter: blur(3px) brightness(75%);
+}
+
+html.dark body {
+  background-image: url("../public/images/dark-background.jpg");
+}
+
+.swiper-wrapper {
+  padding: 8px 0;
+}
