@@ -35,7 +35,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
 
   return (
     <div
-      className="fixed inset-0 bg-dark/50 flex items-start justify-center min-h-screen pt-10 md:pt-20"
+      className="fixed inset-0 bg-dark/50 flex items-start justify-center min-h-screen"
       style={{ zIndex }}
       onClick={onClose}
     >
