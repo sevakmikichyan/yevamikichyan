@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
         <div
           {...rest}
           className={classNames(
-            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2",
+            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2 md:pt-2xl pt-xl",
             appliedBgColor,
             appliedShadowColor, appliedBorderColor
           )}
