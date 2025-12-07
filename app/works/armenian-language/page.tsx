@@ -20,10 +20,10 @@ export default function ArmenianLanguage() {
   }, []);
 
   return (
-    <Page name="armenian-language">
+    <Page name="armenian-language static">
       <Header />
-      <Main>
-        <Container>
+      <Main className="static">
+        <Container className="static">
           <Title heading={1} align="center">Հայոց լեզու</Title>
           <Features />
         </Container>

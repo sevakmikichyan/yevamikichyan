@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { Container, Block } from "../../layout";
 import { Props } from "./types";
+import ReactDOM from "react-dom"
 import { useTheme } from "@/context/theme.context";
 import { applyBgColor, applyBorderColor, applyShadowColor } from "@/common/utils";
 import classNames from "classnames";
@@ -27,34 +27,23 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
   if (!isOpen) return null;
 
   const appliedBgColor = applyBgColor(resolvedTheme);
   const appliedShadowColor = applyShadowColor(oppositeTheme);
   const appliedBorderColor = applyBorderColor(oppositeTheme);
 
-  return ReactDOM.createPortal(
+  return (
     <div
-      className="fixed inset-0 bg-dark/50 flex items-center justify-center h-screen"
+      className="fixed inset-0 bg-dark/50 flex items-start justify-center min-h-screen pt-10 md:pt-20"
       style={{ zIndex }}
       onClick={onClose}
     >
-      <Container size={containerSize} className="flex items-center justify-center">
+      <Container size={containerSize} className="flex justify-center">
         <div
           {...rest}
           className={classNames(
-            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-scroll md:pt-2xl pt-xl border-2",
+            "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto md:pt-2xl pt-xl border-2",
             appliedBgColor,
             appliedShadowColor,
             appliedBorderColor
@@ -70,8 +59,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
           {children}
         </div>
       </Container>
-    </div>,
-    document.body
+    </div>
   );
 };
 
