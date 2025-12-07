@@ -6,6 +6,7 @@ import { useTheme } from "@/context/theme.context";
 import { applyBgColor } from "@/common/utils";
 import classNames from "classnames";
 import { Dropdown } from "../../ui";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -25,7 +26,8 @@ const Header: React.FC = () => {
 
   return (
     <header className={classNames("w-full py-md", appliedBgColor)}>
-      <Container>
+      <Container className="flex items-center justify-between">
+        <Link href="/" className="md:text-xl sm:text-lg text-md">Գլխավոր էջ</Link>
         <Dropdown>
           <Dropdown.Toggle>
             {armenianTheme}
