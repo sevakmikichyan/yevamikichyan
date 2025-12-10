@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Block, Flex, Grid } from "@/common/components/layout";
 import { Paragraph, Span, Title } from "@/common/components/typography";
-import { Audio, Button, Card, Carousel, List, Modal, Reveal } from "@/common/components/ui";
+import { Button, Card, Carousel, List, Modal, Reveal } from "@/common/components/ui";
 import React from "react";
 import { Feature, Props } from "./types";
 import Image from "next/image";
