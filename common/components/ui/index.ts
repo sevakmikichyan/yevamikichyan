@@ -5,4 +5,3 @@ export { default as Card } from "./card/card.component";
 export { default as Modal } from "./modal/modal.component";
 export { default as List } from "./list/list.component";
 export { default as Reveal } from "./reveal/reveal.component";
-export { default as Audio } from "./audio/audio.component";
