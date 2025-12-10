@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose, zIndex = 50, .
             <motion.div
               {...rest}
               className={classNames(
-                "w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2 md:pt-2xl pt-xl",
+                "overflow-x-hidden w-full md:p-md p-xs rounded-md shadow-md relative max-h-[92vh] overflow-y-auto border-2 md:pt-2xl pt-xl",
                 appliedBgColor,
                 appliedShadowColor, appliedBorderColor
               )}

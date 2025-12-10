@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Block, Flex, Grid } from "@/common/components/layout";
 import { Paragraph, Span, Title } from "@/common/components/typography";
-import { Button, Card, Carousel, List, Modal, Reveal } from "@/common/components/ui";
+import { Audio, Button, Card, Carousel, List, Modal, Reveal } from "@/common/components/ui";
 import React from "react";
 import { Feature, Props } from "./types";
 import Image from "next/image";
@@ -13,7 +13,14 @@ const Features: React.FC<Props> = ({ ...rest }) => {
     "/images/armenian-language/prayer-slides/slide-1.jpg",
     "/images/armenian-language/prayer-slides/slide-2.jpg",
     "/images/armenian-language/prayer-slides/slide-3.jpg"
-  ]
+  ];
+
+  const slides = [
+    "/images/armenian-language/slides/slide-1.jpg",
+    "/images/armenian-language/slides/slide-3.jpg",
+    "/images/armenian-language/slides/slide-2.jpg",
+    "/images/armenian-language/slides/slide-4.jpg",
+  ];
 
   const features: Feature[] = [
     {
@@ -366,6 +373,51 @@ const Features: React.FC<Props> = ({ ...rest }) => {
                   className="object-cover w-full md:block hidden"
                 />
               </div>
+            </Block>
+          </Flex>
+        </Block>
+      )
+    },
+    {
+      title: "Այբ Բեն ԳԻմ",
+      children: (
+        <Block>
+          <Flex className="flex-col gap-4 py-4">
+            <Block className="w-full md:mb-lg mb-md">
+              <Carousel
+                effect="cube"
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                className="w-full h-[300px] md:h-[400px]"
+                breakpoints={{
+                  480: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                  768: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                  1024: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                }}>
+                {slides.map((prayer, index) => {
+                  return (
+                    <Carousel.Slide key={index} className="h-full">
+                      <div className="w-full h-full rouded-md overflow-hidden">
+                        <Image
+                          src={prayer}
+                          alt="Alphabet"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </Carousel.Slide>
+                  )
+                })}
+              </Carousel>
+              <audio src="/audios/alphabet.mp3" controls className="w-full md:mt-md mt-sm" />
             </Block>
           </Flex>
         </Block>
