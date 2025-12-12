@@ -95,7 +95,22 @@ const Features: React.FC<Props> = ({ ...rest }) => {
       children: (
         <Flex className="flex-col gap-4 py-4">
           <Block className="w-full">
-            <Image className="md:mb-lg mb-md" src="/images/egeyan-art/feature-2(1).jpg" alt="Egeyan Art" width={400} height={600} />
+            <div className="w-full flex overflow-y-hidden overflow-x-scroll md:mb-md mb-sm">
+              <Image
+                src="/images/egeyan-art/feature-3(1).jpg"
+                alt="Egeyan Art"
+                width={160}
+                height={80}
+                className="object-cover w-full"
+              />
+              <Image
+                src="/images/egeyan-art/feature-3(2).jpg"
+                alt="Egeyan Art"
+                width={160}
+                height={80}
+                className="object-cover w-full"
+              />
+            </div>
             <Block className="w-full md:mb-lg mb-md">
               <Paragraph size="lg">
                 Կենտրոն՝ Կնոս, Ֆայստոս, Մալիա
