@@ -422,6 +422,55 @@ const Features: React.FC<Props> = ({ ...rest }) => {
           </Flex>
         </Block>
       )
+    },
+    {
+      title: "Այբ Բեն ԳԻմ",
+      children: (
+        <Block>
+          <Flex className="flex-col gap-4 py-4">
+            <Block className="w-full md:mb-lg mb-md">
+              <Paragraph size="lg">
+                Եգեյան մշակույթը հանդիսանում էր Արևելքի և Հին Հունաստանի յուրատեսակ կապող օղակը։ Այն գոյություն է ունեցել Եգեյան ծովի կղզիներում՝ Կրետեում և նրա ափերին, մայրցամաքային Հունաստանում՝ Միկենի և Տիրինս քաղաքներում, ինչպես նաև Փոքր Ասիայի արևմտյան ափերին՝ Տրոյա քաղաքում։ Այդ հին մշակույթը ծաղկման շրջանն ապրեց մ․ թ․ ա․ 2–րդ հազարամյակում։
+                Եգեյացիները պատկանում են այն նույն ցեղին, որին պատկանում են նաև խեթերը՝ Փոքր Ասիայի հզոր պետության ստեղծողները։ Մ․ թ․ ա․ 3–րդ հազարամյակում պելասգները, հետագայում նաև հույն–աքքայացիները, բնակություն հաստատեցին այս տարածքում։ Եգեյան արվեստը համարվում է հունական արվեստի նախատիպը և կապված է հնագույն Կնոսոս քաղաքի հետ։
+              </Paragraph>
+              <Carousel
+                effect="cube"
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                className="w-full h-[300px] md:h-[400px]"
+                breakpoints={{
+                  480: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                  768: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                  1024: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                }}>
+                {slides.map((prayer, index) => {
+                  return (
+                    <Carousel.Slide key={index} className="h-full">
+                      <div className="w-full h-full rouded-md overflow-hidden">
+                        <Image
+                          src={prayer}
+                          alt="Alphabet"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </Carousel.Slide>
+                  )
+                })}
+              </Carousel>
+              <audio src="/audios/alphabet.mp3" controls className="w-full md:mt-md mt-sm" />
+            </Block>
+          </Flex>
+        </Block>
+      )
     }
   ];
 
