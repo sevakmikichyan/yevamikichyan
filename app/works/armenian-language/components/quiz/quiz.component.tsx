@@ -2,6 +2,7 @@ import { Paragraph, Span } from "@/common/components/typography";
 import { Button, Radio } from "@/common/components/ui";
 import { ColorVariant } from "@/common/types";
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const questions = [
   {
@@ -36,13 +37,14 @@ const getScoreData = (score: number): { color: ColorVariant, label: string, icon
   if (score === 3) return { color: 'info', label: 'Լավ', icon: 'ⓘ' };
   if (score === 2) return { color: 'warning', label: 'Միջին', icon: '⚠' };
   if (score === 1) return { color: 'error', label: 'Վատ', icon: '✘' };
-  return { color: 'error', label: 'Շատ վատ', icon: '✘' }; 
+  return { color: 'error', label: 'Շատ վատ', icon: '✘' };
 };
 
 const Quiz: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(Array(questions.length).fill(null));
   const [score, setScore] = useState<number | null>(null);
+  const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
 
   const selectAnswer = (oIndex: number) => {
     const newAnswers = [...answers];
@@ -50,8 +52,14 @@ const Quiz: React.FC = () => {
     setAnswers(newAnswers);
   };
 
-  const next = () => setCurrent(c => c + 1);
-  const prev = () => setCurrent(c => c - 1);
+  const next = () => {
+    setDirection(1);
+    setCurrent(c => c + 1);
+  };
+  const prev = () => {
+    setDirection(-1);
+    setCurrent(c => c - 1);
+  };
 
   const finishQuiz = () => {
     let result = 0;
@@ -65,25 +73,46 @@ const Quiz: React.FC = () => {
     setScore(null);
   };
 
+  const variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? -300 : 300,
+      opacity: 0
+    })
+  };
+
   if (score !== null) {
     const { color, label, icon } = getScoreData(score);
     return (
-      <div className="w-full flex flex-col items-center justify-center">
-        <Paragraph size="lg" className="flex items-center md:gap-md gap-sm" color={color}>
-          <Span size="2xl" color={color} className="ml-sm flex items-center md:gap-md gap-sm">
-            <Span>
-              {icon}
-            </Span>
-            {score} / {questions.length}
-          </Span>
-        </Paragraph>
-        <Span color={color} size="xl">
-          {label}
-        </Span>
-        <Button className="mt-md" onClick={startAgain}>
-          Սկսել նորից
-        </Button>
-      </div>
+      <AnimatePresence custom={1} mode="wait">
+        <motion.div
+          key={current}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.3 }}
+        >
+          <div className="w-full flex flex-col items-center justify-center">
+            <Paragraph size="lg" className="flex items-center md:gap-md gap-sm" color={color}>
+              <Span size="2xl" color={color} className="ml-sm flex items-center md:gap-md gap-sm">
+                <Span>{icon}</Span>
+                {score} / {questions.length}
+              </Span>
+            </Paragraph>
+            <Span color={color} size="xl">{label}</Span>
+            <Button className="mt-md" onClick={startAgain}>Սկսել նորից</Button>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     );
   }
 
@@ -91,28 +120,40 @@ const Quiz: React.FC = () => {
 
   return (
     <div style={{ padding: 20 }}>
-      <Paragraph size="lg" className="pb-sm">{current + 1}. {q.question}</Paragraph>
+      <AnimatePresence custom={direction} mode="wait">
+        <motion.div
+          key={current}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.3 }}
+        >
+          <Paragraph size="lg" className="pb-sm">{current + 1}. {q.question}</Paragraph>
 
-      <div className="flex flex-col items-start gap-sm">
-        {q.options.map((opt, oi) => (
-          <Radio
-            key={oi}
-            label={opt}
-            name={`q-${current}`}
-            checked={answers[current] === oi}
-            onChange={() => selectAnswer(oi)}
-          />
-        ))}
-      </div>
+          <div className="flex flex-col items-start gap-sm">
+            {q.options.map((opt, oi) => (
+              <Radio
+                key={oi}
+                label={opt}
+                name={`q-${current}`}
+                checked={answers[current] === oi}
+                onChange={() => selectAnswer(oi)}
+              />
+            ))}
+          </div>
 
-      <div className="flex gap-sm mt-md">
-        {current > 0 && <Button outlined onClick={prev}>Նախորդ</Button>}
-        {current < questions.length - 1 ? (
-          <Button onClick={next} disabled={answers[current] === null}>Հաջորդ</Button>
-        ) : (
-          <Button onClick={finishQuiz} disabled={answers[current] === null}>Ավարտել</Button>
-        )}
-      </div>
+          <div className="flex gap-sm mt-md">
+            {current > 0 && <Button outlined onClick={prev}>Նախորդ</Button>}
+            {current < questions.length - 1 ? (
+              <Button onClick={next} disabled={answers[current] === null}>Հաջորդ</Button>
+            ) : (
+              <Button onClick={finishQuiz} disabled={answers[current] === null}>Ավարտել</Button>
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
