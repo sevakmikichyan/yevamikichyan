@@ -7,6 +7,7 @@ import { Button, Card, Carousel, List, Modal, Reveal } from "@/common/components
 import React from "react";
 import { Feature, Props } from "./types";
 import Image from "next/image";
+import Quiz from "../quiz/quiz.component";
 
 const Features: React.FC<Props> = ({ ...rest }) => {
   const prayerImages = [
@@ -20,6 +21,12 @@ const Features: React.FC<Props> = ({ ...rest }) => {
     "/images/armenian-language/slides/slide-3.jpg",
     "/images/armenian-language/slides/slide-2.jpg",
     "/images/armenian-language/slides/slide-4.jpg",
+  ];
+
+  const alphabetMonuments = [
+    "/images/armenian-language/alphabet-monument/img-1.jpg",
+    "/images/armenian-language/alphabet-monument/img-2.jpg",
+    // "/images/armenian-language/alphabet-monument/img-3.jpg",
   ];
 
   const features: Feature[] = [
@@ -64,8 +71,8 @@ const Features: React.FC<Props> = ({ ...rest }) => {
               <List.Item size="lg">
                 <Span className="font-bold" color="error">Ձայնավորներ </Span>
                 Դրանք արտաբերվում են առանց խանգարումների և կազմում են վանկի հիմքը։
-                Հայերենում կա 7 ձայնավոր հնչյուն՝
-                ա, ե, է, ի, ո, օ, ու։
+                Հայերենում կա 6 ձայնավոր հնչյուն՝
+                ա, է(ե), ը, ի, օ(ո), ու։
               </List.Item>
               <List.Item size="lg">
                 <Span className="font-bold" color="error">Բաղաձայններ </Span>
@@ -150,7 +157,7 @@ const Features: React.FC<Props> = ({ ...rest }) => {
       )
     },
     {
-      title: "Հայոց այբուբենի գաղտնիքներն ու յուրահատկությոընները",
+      title: "Հայոց այբուբենի գաղտնիքներն ու յուրահատկությունները",
       children: (
         <Block>
           <Flex className="flex-col gap-4 py-4">
@@ -424,40 +431,31 @@ const Features: React.FC<Props> = ({ ...rest }) => {
       )
     },
     {
-      title: "Այբ Բեն ԳԻմ",
+      title: "Հայոց այբուբենի հուշարձան",
       children: (
         <Block>
           <Flex className="flex-col gap-4 py-4">
             <Block className="w-full md:mb-lg mb-md">
-              <Paragraph size="lg">
-                Եգեյան մշակույթը հանդիսանում էր Արևելքի և Հին Հունաստանի յուրատեսակ կապող օղակը։ Այն գոյություն է ունեցել Եգեյան ծովի կղզիներում՝ Կրետեում և նրա ափերին, մայրցամաքային Հունաստանում՝ Միկենի և Տիրինս քաղաքներում, ինչպես նաև Փոքր Ասիայի արևմտյան ափերին՝ Տրոյա քաղաքում։ Այդ հին մշակույթը ծաղկման շրջանն ապրեց մ․ թ․ ա․ 2–րդ հազարամյակում։
-                Եգեյացիները պատկանում են այն նույն ցեղին, որին պատկանում են նաև խեթերը՝ Փոքր Ասիայի հզոր պետության ստեղծողները։ Մ․ թ․ ա․ 3–րդ հազարամյակում պելասգները, հետագայում նաև հույն–աքքայացիները, բնակություն հաստատեցին այս տարածքում։ Եգեյան արվեստը համարվում է հունական արվեստի նախատիպը և կապված է հնագույն Կնոսոս քաղաքի հետ։
-              </Paragraph>
               <Carousel
-                effect="cube"
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                effect="slide"
                 className="w-full h-[300px] md:h-[400px]"
                 breakpoints={{
-                  480: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                  },
                   768: {
                     slidesPerView: 1,
                     spaceBetween: 0,
                   },
                   1024: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     spaceBetween: 0,
                   },
                 }}>
-                {slides.map((prayer, index) => {
+                {alphabetMonuments.map((monument, index) => {
                   return (
                     <Carousel.Slide key={index} className="h-full">
                       <div className="w-full h-full rouded-md overflow-hidden">
                         <Image
-                          src={prayer}
-                          alt="Alphabet"
+                          src={monument}
+                          alt="Alphabet Monument"
                           fill
                           className="object-contain"
                         />
@@ -466,10 +464,30 @@ const Features: React.FC<Props> = ({ ...rest }) => {
                   )
                 })}
               </Carousel>
-              <audio src="/audios/alphabet.mp3" controls className="w-full md:mt-md mt-sm" />
+            </Block>
+            <Block className="w-full">
+              <Paragraph size="lg">
+                Հայոց այբուբենի հուշարձանը գտնվում է Արագածոտնի մարզում, Արթիկ քաղաքից ոչ հեռու, Օշական գյուղի մոտ։
+              </Paragraph>
+              <Paragraph>Կարճ տեղեկություն՝</Paragraph>
+              <List listStyleType="disc">
+                <List.Item size="lg">Կառուցվել է 2005 թվականին</List.Item>
+                <List.Item size="lg">Նվիրված է հայոց այբուբենի ստեղծման 1600-ամյակին</List.Item>
+                <List.Item size="lg">Հեղինակն է ճարտարապետ Ջիմ Թորոսյանը</List.Item>
+                <List.Item size="lg">Հուշարձանը բաղկացած է հայերեն 39 տառերի քարե քանդակներից, որոնք դասավորված են բաց տարածքում</List.Item>
+              </List>
+              <Paragraph size="lg">
+                Այն խորհրդանշում է հայոց լեզվի, գրի և մշակույթի կարևորությունը։ Հուշարձանի մոտ կա նաև Մեսրոպ Մաշտոցի արձանը, ով ստեղծել է հայոց այբուբենը։
+              </Paragraph>
             </Block>
           </Flex>
         </Block>
+      )
+    },
+    {
+      title: "Խաղ",
+      children: (
+        <Quiz />
       )
     }
   ];

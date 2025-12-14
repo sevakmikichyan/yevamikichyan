@@ -10,7 +10,7 @@ import { Reveal } from "@/common/components/ui";
 export default function ArmenianLanguage() {
   useEffect(() => {
     const originalBackground = document.body.style.background;
-    document.body.style.backgroundImage = "url('/images/armenian-language/mesrop-mashtoc-2.jpg')";
+    document.body.style.backgroundImage = "url('/images/armenian-language/mesrop-mashtoc-3.jpg')";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";

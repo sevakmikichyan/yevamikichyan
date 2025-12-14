@@ -134,6 +134,25 @@ export const applyShadowColor = (color: ColorVariant): string => {
   }
 };
 
+export const applyAccentColor = (color: ColorVariant): string => {
+  switch (color) {
+    case "primary": return "accent-primary";
+    case "secondary": return "accent-secondary";
+    case "error": return "accent-error";
+    case "warning": return "accent-warning";
+    case "success": return "accent-success";
+    case "info": return "accent-info";
+    case "light": return "accent-light";
+    case "dark": return "accent-dark";
+    case "orange": return "accent-orange";
+    case "violet": return "accent-violet";
+    case "indigo": return "accent-indigo";
+    case "teal": return "accent-teal";
+    case "rose": return "accent-rose";
+    default: return "accent-primary";
+  }
+};
+
 export const getLightOrDark = (color: ColorVariant): "light" | "dark" => {
   const colorsForLight = ["primary", "secondary", "error", "success", "dark", "indigo", "violet", "rose"];
   const colorsForDark = ["warning", "info", "orange", "teal", "light"];
