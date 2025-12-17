@@ -57,6 +57,28 @@ const Works: React.FC<Props> = ({ ...rest }) => {
           </Flex>
         </Card>
       </Carousel.Slide>
+      <Carousel.Slide className="w-full">
+        <Card className="w-full h-full">
+          <Flex className="w-full flex-col h-full md:gap-md gap-sm">
+            <Block className="w-full h-64 bg-light rounded-md overflow-hidden">
+              <Image
+                src="/images/armenian-battles/main.jpg"
+                alt="Armenian Language"
+                width={240}
+                height={120}
+                className="object-cover w-full h-full"
+              />
+            </Block>
+            <Flex className="w-full flex-1 h-full flex-col md:gap-md justify-center gap-sm">
+              <Title heading={3}>Հայոց պատմության հին շրջանի ճակատամարտերը</Title>
+              <Button
+                className="w-full"
+                onClick={() => router.push("/works/armenian-battles")}
+              >Տեսնել</Button>
+            </Flex>
+          </Flex>
+        </Card>
+      </Carousel.Slide>
     </Carousel>
   );
 };

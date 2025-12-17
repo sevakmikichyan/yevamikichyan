@@ -6,3 +6,4 @@ export { default as Modal } from "./modal/modal.component";
 export { default as List } from "./list/list.component";
 export { default as Reveal } from "./reveal/reveal.component";
 export { default as Radio } from "./radio/radio.component";
+export { default as Table } from "./table/table.component";

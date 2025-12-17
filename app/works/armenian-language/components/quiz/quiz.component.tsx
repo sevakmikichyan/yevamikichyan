@@ -105,7 +105,7 @@ const Quiz: React.FC = () => {
             <Paragraph size="lg" className="flex items-center md:gap-md gap-sm" color={color}>
               <Span size="2xl" color={color} className="ml-sm flex items-center md:gap-md gap-sm">
                 <Span>{icon}</Span>
-                {score} / {questions.length}
+                {score} / {questions.length} միավոր
               </Span>
             </Paragraph>
             <Span color={color} size="xl">{label}</Span>

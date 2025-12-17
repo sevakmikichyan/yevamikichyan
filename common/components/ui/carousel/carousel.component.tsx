@@ -31,7 +31,7 @@ const defaultBreakpoints: SwiperComponentProps["breakpoints"] = {
 const Carousel: React.FC<Props> & { Slide: typeof SwiperSlide } = ({
   children,
   breakpoints = defaultBreakpoints,
-  autoplay,
+  autoplay = false,
   effect = "cube",
   ...rest
 }) => {
