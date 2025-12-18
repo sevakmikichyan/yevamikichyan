@@ -26,8 +26,12 @@ const Features: React.FC<Props> = ({ ...rest }) => {
   const alphabetMonuments = [
     "/images/armenian-language/alphabet-monument/img-1.jpg",
     "/images/armenian-language/alphabet-monument/img-2.jpg",
-    // "/images/armenian-language/alphabet-monument/img-3.jpg",
   ];
+
+  const ourWorkProcess = [
+    "/images/armenian-language/work-process/img-1.jpg",
+    "/images/armenian-language/work-process/img-2.jpg",
+  ]
 
   const features: Feature[] = [
     {
@@ -489,7 +493,46 @@ const Features: React.FC<Props> = ({ ...rest }) => {
       children: (
         <Quiz />
       )
-    }
+    },
+    {
+      title: "Մեր աշխատանքի ընթացքը",
+      children: (
+        <Block>
+          <Flex className="flex-col gap-4 py-4">
+            <Block className="w-full md:mb-lg mb-md">
+              <Carousel
+                effect="slide"
+                className="w-full h-[300px] md:h-[400px]"
+                breakpoints={{
+                  768: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                  },
+                  1024: {
+                    slidesPerView: 2,
+                    spaceBetween: 0,
+                  },
+                }}>
+                {ourWorkProcess.map((workProcess, index) => {
+                  return (
+                    <Carousel.Slide key={index} className="h-full">
+                      <div className="w-full h-full rouded-md overflow-hidden">
+                        <Image
+                          src={workProcess}
+                          alt="Work process"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </Carousel.Slide>
+                  )
+                })}
+              </Carousel>
+            </Block>
+          </Flex>
+        </Block>
+      )
+    },
   ];
 
   const [selectedFeatureIndex, setSelectedFeatureIndex] = useState<number | null>(null);
