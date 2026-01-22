@@ -1,7 +1,7 @@
 import { ColorVariant } from "../types";
 
 export const colors = {
-  primary: "#0d6efd",
+  primary: "#9a8478",
   secondary: "#6c757d",
   error: "#dc3545",
   warning: "#ffc107",
