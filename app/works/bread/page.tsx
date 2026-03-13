@@ -88,10 +88,16 @@ import Header from "@/common/components/layout/header/header.component"
 import { Title } from "@/common/components/typography";
 import { Carousel } from "@/common/components/ui"
 import classNames from "classnames";
+import { video } from "framer-motion/client";
 import { useEffect, useRef } from "react";
 
 interface VideoSlide {
   type: "video";
+  src: string;
+}
+
+interface IframeSlide {
+  type: "iframe";
   src: string;
 }
 
@@ -112,21 +118,17 @@ interface AudiosSlide {
   audios: string[];
 }
 
-export type Slide = VideoSlide | ImageSlide | ImagesSlide | AudiosSlide;
+export type Slide = VideoSlide | IframeSlide | ImageSlide | ImagesSlide | AudiosSlide;
 
 export default function Bread() {
 
   const slides: Slide[] = [
     {
-      type: "video",
+      type: "iframe",
       src: "https://www.youtube.com/embed/k8R25T6LAMQ?si=LrUhs9InGtCFIvpS",
     },
     {
-      type: "video",
-      src: "https://www.youtube.com/embed/dF2XJD0dJSk?si=00CxDQOvN325FLXL",
-    },
-    {
-      type: "video",
+      type: "iframe",
       src: "https://www.youtube.com/embed/XDyUVrgiqis?si=1gpSZPPLGsE0_8nQ",
     },
     {
@@ -134,20 +136,12 @@ export default function Bread() {
       src: "/images/bread/wheat-field.jpg"
     },
     {
-      type: "video",
+      type: "iframe",
       src: "https://www.youtube.com/embed/62txhuiOvgM?si=WIHWzxBBcVyDdEcL",
     },
     {
       type: "video",
-      src: "https://www.youtube.com/embed/1wErAeUsUVU?si=NxbvNxTlMntwVmPe&start=425",
-    },
-    {
-      type: "images",
-      className: "object-contain",
-      images: [
-        "/images/bread/forest.jpg",
-        "/images/bread/forest-2.jpg"
-      ]
+      src: "/videos/bread/mult.MP4"
     },
     {
       type: "audios",
@@ -159,8 +153,20 @@ export default function Bread() {
       ]
     },
     {
-      type: "video",
+      type: "images",
+      className: "object-contain",
+      images: [
+        "/images/bread/forest.jpg",
+        "/images/bread/forest-2.jpg"
+      ]
+    },
+    {
+      type: "iframe",
       src: "https://www.youtube.com/embed/ZXZUYL7Mk0s?si=WQW9hjih2WM0FZFW",
+    },
+    {
+      type: "image",
+      src: "/images/bread/bread.jpg"
     }
   ];
 
@@ -173,7 +179,7 @@ export default function Bread() {
       });
     };
 
-    const carouselEl = document.querySelector('.carousel-container'); // փոխիր ըստ իրական className-ի
+    const carouselEl = document.querySelector('.carousel-container');
     carouselEl?.addEventListener('slideChange', handleSlideChange);
 
     return () => carouselEl?.removeEventListener('slideChange', handleSlideChange);
@@ -215,13 +221,22 @@ export default function Bread() {
               <Carousel.Slide key={index} className="h-full w-full">
                 <div className="w-full h-full rounded-md overflow-hidden">
 
-                  {slide.type === "video" && (
+                  {slide.type === "iframe" && (
                     <iframe
                       className="w-full h-full"
                       src={slide.src}
                       title="YouTube video player"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
+                    />
+                  )}
+
+                  {slide.type === "video" && (
+                    <video
+                      className="w-full h-full object-cover"
+                      src={slide.src}
+                      controls
+                      playsInline
                     />
                   )}
 
@@ -256,7 +271,10 @@ export default function Bread() {
                   )}
 
                   {slide.type === "audios" && (
-                    <div className="w-full h-full flex flex-col items-start justify-start gap-6 p-4">
+                    <div
+                      className="w-full h-full flex flex-col items-start justify-start gap-6 p-4 bg-cover bg-center"
+                      style={{ backgroundImage: "url('/images/bread/audio-bg.jpg')" }}
+                    >
                       {slide?.audios?.map((audio, i) => {
                         const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -280,7 +298,7 @@ export default function Bread() {
                           <div key={i} className="w-full flex flex-col items-start gap-2 px-24">
                             <audio ref={audioRef} controls className="w-full md:mt-md mt-sm" src={audio}></audio>
                           </div>
-                        )
+                        );
                       })}
                     </div>
                   )}
