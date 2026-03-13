@@ -141,7 +141,7 @@ export default function Bread() {
     },
     {
       type: "video",
-      src: "/videos/bread/mult.MP4"
+      src: "/videos/bread/mult.mp4"
     },
     {
       type: "audios",
@@ -167,6 +167,10 @@ export default function Bread() {
     {
       type: "image",
       src: "/images/bread/bread.jpg"
+    },
+    {
+      type: "iframe",
+      src: "https://www.youtube.com/embed/jauXEC9TLGg?si=PRlXkROzEFD0MWiC"
     }
   ];
 
